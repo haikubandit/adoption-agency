@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Details{% endblock %}
+
+{% block content %}
+
+<div class="container justify-content-center">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="display-1">{{ pet.name }}</h1>
+            {% if pet.photo_url %}
+            <img class="img-thumbnail" src="{{ pet.photo_url }}" alt="pet-img">
+            {% endif %}
+            <p>{{ pet.notes }}</p>
+
+            <h2>Update</h2>
+
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                {{form.photo_url.label(class_="")}}
+                {{form.photo_url(class_="form-control form-control-lg")}}
+                <p>
+                    {% if form.photo_url.errors %}
+                        <b class="text-danger">{{ form.photo_url.errors }}</b>
+                    {% endif %}
+                </p>
+                {{form.notes.label(class_="mt-1")}}
+                {{form.notes(class_="form-control")}}
+
+                <span>
+                {{form.available.label(class_="mt-1")}}
+            </span>
+                {{form.available(class_="form-control inline-block")}}
+            
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
